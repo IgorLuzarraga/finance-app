@@ -6,7 +6,6 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import NavBar from '@/scenes/navBar'
 import Dashboard from '@/scenes/dashboard'
 import Predictions from './scenes/predictions'
-// import DashboardFlexbox from '@/scenes/dashboardFlexbox'
 
 function App() {
   const theme = useMemo(() => createTheme(themeSettings), [])

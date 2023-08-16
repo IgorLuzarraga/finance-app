@@ -1,8 +1,9 @@
 import BoxHeader from "@/components/BoxHeader";
-import DashboardBox from "@/components/DashBoardBox"
+import DashboardBox from "../../components/DashboardBox";
 import { useGetKpisQuery } from "@/state/api";
 import { useTheme } from "@mui/material";
 import { useMemo } from "react"
+import { PaletteType } from "@/types/paletteTypes";
 import {
     Area,
     AreaChart,
@@ -21,6 +22,8 @@ import {
 const Row1 = () => {
     const { palette } = useTheme()
     const { data, isError, isLoading } = useGetKpisQuery();
+
+    const typedPalette = palette as unknown as { primary: PaletteType, tertiary: PaletteType };
 
     const revenue = useMemo(() => {
         return (
@@ -94,24 +97,28 @@ const Row1 = () => {
                             <linearGradient id="colorRevenue" x1="0" y1="0" x2="0" y2="1">
                                 <stop
                                     offset="5%"
-                                    stopColor={palette.primary[300]}
+                                    // stopColor={palette.primary[300]}
+                                    stopColor={typedPalette.primary[300]}
                                     stopOpacity={0.5}
                                 />
                                 <stop
                                     offset="95%"
-                                    stopColor={palette.primary[300]}
+                                    // stopColor={palette.primary[300]}
+                                    stopColor={typedPalette.primary[300]}
                                     stopOpacity={0}
                                 />
                             </linearGradient>
                             <linearGradient id="colorExpenses" x1="0" y1="0" x2="0" y2="1">
                                 <stop
                                     offset="5%"
-                                    stopColor={palette.primary[300]}
+                                    // stopColor={palette.primary[300]}
+                                    stopColor={typedPalette.primary[300]}
                                     stopOpacity={0.5}
                                 />
                                 <stop
                                     offset="95%"
-                                    stopColor={palette.primary[300]}
+                                    // stopColor={palette.primary[300]}
+                                    stopColor={typedPalette.primary[300]}
                                     stopOpacity={0}
                                 />
                             </linearGradient>
@@ -195,7 +202,8 @@ const Row1 = () => {
                             yAxisId="left"
                             type="monotone"
                             dataKey="profit"
-                            stroke={palette.tertiary[500]}
+                            // stroke={palette.tertiary[500]}
+                            stroke={typedPalette.tertiary[500]}
                         />
                         <Line
                             yAxisId="right"
@@ -228,12 +236,14 @@ const Row1 = () => {
                             <linearGradient id="colorRevenue" x1="0" y1="0" x2="0" y2="1">
                                 <stop
                                     offset="5%"
-                                    stopColor={palette.primary[300]}
+                                    // stopColor={palette.primary[300]}
+                                    stopColor={typedPalette.primary[300]}
                                     stopOpacity={0.8}
                                 />
                                 <stop
                                     offset="95%"
-                                    stopColor={palette.primary[300]}
+                                    // stopColor={palette.primary[300]}
+                                    stopColor={typedPalette.primary[300]}
                                     stopOpacity={0}
                                 />
                             </linearGradient>

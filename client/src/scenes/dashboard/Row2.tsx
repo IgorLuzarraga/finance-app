@@ -1,10 +1,11 @@
 import BoxHeader from "@/components/BoxHeader"
-import DashboardBox from "@/components/DashBoardBox"
+import DashboardBox from "../../components/DashboardBox"
 import FlexBetween from "@/components/FlexBetween"
 import { useGetKpisQuery, useGetProductsQuery } from "@/state/api"
 import { Box, Typography, useTheme } from "@mui/material"
 import { useMemo } from "react"
 import { CartesianGrid, LineChart, Tooltip, ResponsiveContainer, XAxis, YAxis, Line, PieChart, Pie, Cell, ScatterChart, ZAxis, Scatter } from "recharts"
+import { PaletteType } from "@/types/paletteTypes"
 
 const pieData = [
     { name: "Group A", value: 600 },
@@ -13,7 +14,13 @@ const pieData = [
 
 const Row2 = () => {
     const { palette } = useTheme()
-    const pieColors = [palette.primary[800], palette.primary[300]]
+
+    // Ensure the palette object adheres to the Palette interface
+    const typedPalette = palette as unknown as { primary: PaletteType, tertiary: PaletteType };
+
+    const pieColors = [typedPalette.primary[800], typedPalette.primary[300]];
+
+    // const pieColors = [palette.primary[800], palette.primary[300]]
     const { data: operationalData, isError: isErrorKpis, isLoading: isLoadingKpis } = useGetKpisQuery()
     const { data: productData, isError: isErrorProducts, isLoading: isLoadingProducts } = useGetProductsQuery()
 
@@ -95,7 +102,8 @@ const Row2 = () => {
                             yAxisId="left"
                             type="monotone"
                             dataKey="Non Operational Expenses"
-                            stroke={palette.tertiary[500]}
+                            // stroke={palette.tertiary[500]}
+                            stroke={typedPalette.tertiary[500]}
                         />
                         <Line
                             yAxisId="right"
@@ -135,7 +143,8 @@ const Row2 = () => {
                     </PieChart>
                     <Box ml="-0.7rem" flexBasis="40%" textAlign="center">
                         <Typography variant="h5">Target Sales</Typography>
-                        <Typography m="0.3rem 0" variant="h3" color={palette.primary[300]}>
+                        {/* <Typography m="0.3rem 0" variant="h3" color={palette.primary[300]}> */}
+                        <Typography m="0.3rem 0" variant="h3" color={typedPalette.primary[300]}>
                             83
                         </Typography>
                         <Typography variant="h6">
@@ -188,7 +197,8 @@ const Row2 = () => {
                         <Scatter
                             name="Product Expenses Ratio"
                             data={productPriceAndExpenseData}
-                            fill={palette.tertiary[500]}
+                            // fill={palette.tertiary[500]}
+                            fill={typedPalette.tertiary[500]}
                         />
                     </ScatterChart>
                 </ResponsiveContainer>

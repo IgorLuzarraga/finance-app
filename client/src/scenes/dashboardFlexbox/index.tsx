@@ -1,7 +1,5 @@
 import { Box, useMediaQuery } from '@mui/material';
 
-type Props = {};
-
 const flexContainerStyle = {
     display: 'flex',
     flexWrap: 'wrap',
@@ -19,7 +17,7 @@ const flexItemStyle = {
     alignItems: 'center',
 };
 
-const DashboardFlexbox = (props: Props) => {
+const DashboardFlexbox = () => {
     const isAboveMediumScreens = useMediaQuery('(min-width: 1200px)');
 
     return (

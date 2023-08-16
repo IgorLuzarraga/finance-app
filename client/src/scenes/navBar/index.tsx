@@ -3,12 +3,13 @@ import { Link } from 'react-router-dom'
 import { Box, Typography, useTheme } from '@mui/material'
 import FlexBetween from '@/components/FlexBetween'
 import PixIcon from '@mui/icons-material/Pix';
+import { PaletteType } from "@/types/paletteTypes";
 
-type Props = {}
-
-const NavBar = (props: Props) => {
+const NavBar = () => {
     const { palette } = useTheme()
     const [selected, setSelected] = useState("dashboard")
+
+    const typedPalette = palette as unknown as { primary: PaletteType, tertiary: PaletteType };
 
     return (
         <FlexBetween
@@ -26,7 +27,8 @@ const NavBar = (props: Props) => {
 
             {/* RIGHT SIDE */}
             <FlexBetween gap="4rem">
-                <Box sx={{ "&:hover": { color: palette.primary[100], cursor: 'pointer' } }}>
+                {/* <Box sx={{ "&:hover": { color: palette.primary[100], cursor: 'pointer' } }}> */}
+                <Box sx={{ "&:hover": { color: typedPalette.primary[100], cursor: 'pointer' } }}>
                     <Link
                         to="/"
                         onClick={() => setSelected('dashboard')}
@@ -38,7 +40,8 @@ const NavBar = (props: Props) => {
                         dashboard
                     </Link>
                 </Box>
-                <Box sx={{ "&:hover": { color: palette.primary[100] }, cursor: 'pointer' }}>
+                {/* <Box sx={{ "&:hover": { color: palette.primary[100] }, cursor: 'pointer' }}> */}
+                <Box sx={{ "&:hover": { color: typedPalette.primary[100] }, cursor: 'pointer' }}>
                     <Link
                         to="/predictions"
                         onClick={() => setSelected('predictions')}

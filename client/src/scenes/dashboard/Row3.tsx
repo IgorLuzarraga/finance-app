@@ -1,4 +1,4 @@
-import DashboardBox from "@/components/DashBoardBox"
+import DashboardBox from "../../components/DashboardBox"
 import { useGetKpisQuery, useGetProductsQuery, useGetTransactionsQuery } from "@/state/api"
 import { useMemo } from "react"
 import { DataGrid, GridCellParams } from "@mui/x-data-grid"
@@ -6,10 +6,14 @@ import BoxHeader from "@/components/BoxHeader"
 import { Box, Typography, useTheme } from "@mui/material"
 import FlexBetween from "@/components/FlexBetween"
 import { Cell, Pie, PieChart } from "recharts"
+import { PaletteType } from "@/types/paletteTypes"
 
 const Row3 = () => {
     const { palette } = useTheme()
-    const pieColors = [palette.primary[800], palette.primary[500]]
+
+    const typedPalette = palette as unknown as { primary: PaletteType, tertiary: PaletteType };
+
+    const pieColors = [typedPalette.primary[800], typedPalette.primary[500]];
     const { data: kpiData, isError: isErrorKpis, isLoading: isLoadingKpis } = useGetKpisQuery()
     const { data: productData, isError: isErrorProducts, isLoading: isLoadingProducts } = useGetProductsQuery()
     const { data: transactionData, isError: isErrorTransactions, isLoading: isLoadingTransactions } = useGetTransactionsQuery()
@@ -201,12 +205,12 @@ const Row3 = () => {
                 <Box
                     height="15px"
                     margin="1.25rem 1rem 0.4rem 1rem"
-                    bgcolor={palette.primary[800]}
+                    bgcolor={typedPalette.primary[800]}
                     borderRadius="1rem"
                 >
                     <Box
                         height="15px"
-                        bgcolor={palette.primary[600]}
+                        bgcolor={typedPalette.primary[600]}
                         borderRadius="1rem"
                         width="40%"
                     >

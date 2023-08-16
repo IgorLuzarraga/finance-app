@@ -1,15 +1,18 @@
-import DashboardBox from "@/components/DashBoardBox"
+import DashboardBox from "../../components/DashboardBox"
 import FlexBetween from "@/components/FlexBetween"
 import { useGetKpisQuery } from "@/state/api"
 import { Box, Button, Typography, useTheme } from "@mui/material"
 import { useMemo, useState } from "react"
 import { CartesianGrid, Label, Legend, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts"
 import regression, { DataPoint } from 'regression'
+import { PaletteType } from "@/types/paletteTypes"
 
 const Predictions = () => {
     const { palette } = useTheme()
     const [isPredictions, setIsPredictions] = useState(false)
     const { data: kpiData, isError, isLoading } = useGetKpisQuery();
+
+    const typedPalette = palette as unknown as { primary: PaletteType, secondary: PaletteType, tertiary: PaletteType };
 
     const formattedData = useMemo(() => {
         if (!kpiData) return []
@@ -113,7 +116,7 @@ const Predictions = () => {
                         <Line
                             strokeDasharray="5 5"
                             dataKey="Predicted Revenue"
-                            stroke={palette.secondary[500]}
+                            stroke={typedPalette.secondary[500]}
                         />
                     )}
                 </LineChart>

@@ -1,3 +1,5 @@
+import { PaletteType } from "./types/paletteTypes";
+
 export const tokens = {
     grey: {
         100: "#f0f0f3",
@@ -9,7 +11,7 @@ export const tokens = {
         700: "#6b6d74",
         800: "#48494e",
         900: "#242427",
-    },
+    } as PaletteType,
     primary: {
         // light green
         100: "#d0fcf4",
@@ -21,7 +23,7 @@ export const tokens = {
         700: "#0b8f78",
         800: "#076050",
         900: "#043028",
-    },
+    } as PaletteType,
     secondary: {
         // yellow
         100: "#fcf0dd",
@@ -33,11 +35,23 @@ export const tokens = {
         700: "#916c33",
         800: "#614822",
         900: "#302411",
-    },
+    } as PaletteType,
+    // tertiary: {
+    //     // purple
+    //     500: "#8884d8",
+    // },
     tertiary: {
         // purple
+        100: "#ccc9e0",
+        200: "#aaa6c9",
+        300: "#8884d8",
+        400: "#6660c0",
         500: "#8884d8",
-    },
+        600: "#222988",
+        700: "#000068",
+        800: "#000048",
+        900: "#000028",
+    } as PaletteType,
     background: {
         light: "#2d2d34",
         main: "#1f2026",

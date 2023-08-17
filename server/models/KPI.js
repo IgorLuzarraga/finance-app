@@ -1,21 +1,28 @@
 import mongoose from "mongoose";
-import { loadType } from "mongoose-currency";
 
 const Schema = mongoose.Schema;
-loadType(mongoose);
+
+// Define custom getter and setter for currency values
+function currencyGetter(v) {
+    return (v / 100).toFixed(2); // Convert cents to dollars with 2 decimal places
+}
+
+function currencySetter(v) {
+    return Math.round(parseFloat(v) * 100); // Convert dollars to cents
+}
 
 const daySchema = new Schema(
     {
         date: String,
         revenue: {
-            type: mongoose.Types.Currency,
-            currency: "USD",
-            get: (v) => v / 100,
+            type: Number, // Store amount in cents
+            get: currencyGetter,
+            set: currencySetter,
         },
         expenses: {
-            type: mongoose.Types.Currency,
-            currency: "USD",
-            get: (v) => v / 100,
+            type: Number, // Store amount in cents
+            get: currencyGetter,
+            set: currencySetter,
         },
     },
     { toJSON: { getters: true } }
@@ -25,24 +32,24 @@ const monthSchema = new Schema(
     {
         month: String,
         revenue: {
-            type: mongoose.Types.Currency,
-            currency: "USD",
-            get: (v) => v / 100,
+            type: Number, // Store amount in cents
+            get: currencyGetter,
+            set: currencySetter,
         },
         expenses: {
-            type: mongoose.Types.Currency,
-            currency: "USD",
-            get: (v) => v / 100,
+            type: Number, // Store amount in cents
+            get: currencyGetter,
+            set: currencySetter,
         },
         operationalExpenses: {
-            type: mongoose.Types.Currency,
-            currency: "USD",
-            get: (v) => v / 100,
+            type: Number, // Store amount in cents
+            get: currencyGetter,
+            set: currencySetter,
         },
         nonOperationalExpenses: {
-            type: mongoose.Types.Currency,
-            currency: "USD",
-            get: (v) => v / 100,
+            type: Number, // Store amount in cents
+            get: currencyGetter,
+            set: currencySetter,
         },
     },
     { toJSON: { getters: true } }
@@ -51,26 +58,26 @@ const monthSchema = new Schema(
 const KPISchema = new Schema(
     {
         totalProfit: {
-            type: mongoose.Types.Currency,
-            currency: "USD",
-            get: (v) => v / 100,
+            type: Number, // Store amount in cents
+            get: currencyGetter,
+            set: currencySetter,
         },
         totalRevenue: {
-            type: mongoose.Types.Currency,
-            currency: "USD",
-            get: (v) => v / 100,
+            type: Number, // Store amount in cents
+            get: currencyGetter,
+            set: currencySetter,
         },
         totalExpenses: {
-            type: mongoose.Types.Currency,
-            currency: "USD",
-            get: (v) => v / 100,
+            type: Number, // Store amount in cents
+            get: currencyGetter,
+            set: currencySetter,
         },
         expensesByCategory: {
             type: Map,
             of: {
-                type: mongoose.Types.Currency,
-                currency: "USD",
-                get: (v) => v / 100,
+                type: Number, // Store amount in cents
+                get: currencyGetter,
+                set: currencySetter,
             },
         },
         monthlyData: [monthSchema],

@@ -11,7 +11,7 @@ import transactionRoutes from "./routes/transaction.js"
 import KPI from "./models/KPI.js"
 import Product from "./models/Product.js"
 import Transaction from "./models/Transaction.js"
-import { kpis, products, transactions } from "./data/data.js"
+import { modifiedKPIs, modifiedProducts, modifiedTransactions } from "./utils/formatData.js"
 
 // CONFIGURATIONS
 dotenv.config()
@@ -32,52 +32,6 @@ app.use("/transaction", transactionRoutes)
 // MONGOOSE SETUP
 const PORT = process.env.PORT || 9000
 
-
-//
-// Define a function to convert currency strings to cents
-function currencyStringToCents(currencyString) {
-    const numericValue = parseFloat(currencyString.replace(/[^0-9.-]+/g, ""));
-    return Math.round(numericValue * 100);
-}
-
-// Iterate through kpis array and modify currency fields
-const modifiedKPIs = kpis.map(kpi => ({
-    ...kpi,
-    totalProfit: currencyStringToCents(kpi.totalProfit),
-    totalRevenue: currencyStringToCents(kpi.totalRevenue),
-    totalExpenses: currencyStringToCents(kpi.totalExpenses),
-    monthlyData: kpi.monthlyData.map(month => ({
-        ...month,
-        revenue: currencyStringToCents(month.revenue),
-        expenses: currencyStringToCents(month.expenses),
-        operationalExpenses: currencyStringToCents(month.operationalExpenses),
-        nonOperationalExpenses: currencyStringToCents(month.nonOperationalExpenses),
-    })),
-    dailyData: kpi.dailyData.map(day => ({
-        ...day,
-        revenue: currencyStringToCents(day.revenue),
-        expenses: currencyStringToCents(day.expenses),
-    })),
-    expensesByCategory: Object.fromEntries(
-        Object.entries(kpi.expensesByCategory).map(([category, value]) => [
-            category,
-            currencyStringToCents(value),
-        ])
-    ),
-}));
-
-const modifiedProducts = products.map(product => ({
-    ...product,
-    price: currencyStringToCents(product.price),
-    expense: currencyStringToCents(product.expense),
-}));
-
-const modifiedTransactions = transactions.map(transaction => ({
-    ...transaction,
-    amount: currencyStringToCents(transaction.amount),
-}));
-//
-
 mongoose
     .connect(process.env.MONGO_URL, {
         useNewUrlParser: true,
@@ -89,7 +43,6 @@ mongoose
         /* ADD DATA ONE TIME ONLY OR AS NEEDED */
         // ADD DATA TO MONGDB
         // await mongoose.connection.db.dropDatabase();
-        // KPI.insertMany(kpis);
         // KPI.insertMany(modifiedKPIs);
         // Product.insertMany(modifiedProducts);
         // Transaction.insertMany(modifiedTransactions);

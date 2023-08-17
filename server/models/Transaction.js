@@ -2,18 +2,8 @@ import mongoose from "mongoose";
 
 const Schema = mongoose.Schema;
 
-// Define custom getter and setter for currency values
-// function currencyGetter(v) {
-//     return (v / 100).toFixed(2); // Convert cents to dollars with 2 decimal places
-// }
-
 function currencyGetter(v) {
     return (v / 100);
-}
-
-
-function currencySetter(v) {
-    return Math.round(parseFloat(v) * 100); // Convert dollars to cents
 }
 
 const TransactionSchema = new Schema(
@@ -25,7 +15,6 @@ const TransactionSchema = new Schema(
         amount: {
             type: Number, // Store amount in cents
             get: currencyGetter,
-            // set: currencySetter,
         },
         productIds: [
             {

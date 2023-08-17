@@ -3,8 +3,12 @@ import mongoose from "mongoose";
 const Schema = mongoose.Schema;
 
 // Define custom getter and setter for currency values
+// function currencyGetter(v) {
+//     return (v / 100).toFixed(2); // Convert cents to dollars with 2 decimal places
+// }
+
 function currencyGetter(v) {
-    return (v / 100).toFixed(2); // Convert cents to dollars with 2 decimal places
+    return (v / 100);
 }
 
 function currencySetter(v) {
@@ -17,12 +21,12 @@ const daySchema = new Schema(
         revenue: {
             type: Number, // Store amount in cents
             get: currencyGetter,
-            set: currencySetter,
+            // set: currencySetter,
         },
         expenses: {
             type: Number, // Store amount in cents
             get: currencyGetter,
-            set: currencySetter,
+            // set: currencySetter,
         },
     },
     { toJSON: { getters: true } }
@@ -34,22 +38,22 @@ const monthSchema = new Schema(
         revenue: {
             type: Number, // Store amount in cents
             get: currencyGetter,
-            set: currencySetter,
+            // set: currencySetter,
         },
         expenses: {
             type: Number, // Store amount in cents
             get: currencyGetter,
-            set: currencySetter,
+            // set: currencySetter,
         },
         operationalExpenses: {
             type: Number, // Store amount in cents
             get: currencyGetter,
-            set: currencySetter,
+            // set: currencySetter,
         },
         nonOperationalExpenses: {
             type: Number, // Store amount in cents
             get: currencyGetter,
-            set: currencySetter,
+            // set: currencySetter,
         },
     },
     { toJSON: { getters: true } }
@@ -60,24 +64,24 @@ const KPISchema = new Schema(
         totalProfit: {
             type: Number, // Store amount in cents
             get: currencyGetter,
-            set: currencySetter,
+            // set: currencySetter,
         },
         totalRevenue: {
             type: Number, // Store amount in cents
             get: currencyGetter,
-            set: currencySetter,
+            // set: currencySetter,
         },
         totalExpenses: {
             type: Number, // Store amount in cents
             get: currencyGetter,
-            set: currencySetter,
+            // set: currencySetter,
         },
         expensesByCategory: {
             type: Map,
             of: {
                 type: Number, // Store amount in cents
                 get: currencyGetter,
-                set: currencySetter,
+                // set: currencySetter,
             },
         },
         monthlyData: [monthSchema],

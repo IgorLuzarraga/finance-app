@@ -7,7 +7,7 @@
 
 Note: remember to run the frontend (client) after
 Note2: you need a file .env in your proyect (outside src folder), with this variables:
-MONGO_URL=mongodb+srv://<user>:<password>@cluster0.psqapso.mongodb.net/?retryWrites=true&w=majority
+MONGO_URL=mongodb+srv://userName:userPassword@cluster0.psqapso.mongodb.net/?retryWrites=true&w=majority
 PORT=8080
 
-<user><password> MongoDB user and password
+userName, userPassword:  MongoDB user and password

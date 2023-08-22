@@ -12,10 +12,10 @@ type Props = {
 const BoxHeader = ({ icon, title, subtitle, sideText }: Props) => {
     const { palette } = useTheme()
 
-    const typedPalette = palette as unknown as { primary: PaletteType, secondary: PaletteType, tertiary: PaletteType };
+    const typedPalette = palette as unknown as { grey: PaletteType, primary: PaletteType, secondary: PaletteType, tertiary: PaletteType };
 
     return (
-        <FlexBetween color={palette.grey[400]} margin="1.5rem 1rem 0 1rem">
+        <FlexBetween color={typedPalette.grey[400]} margin="1.5rem 1rem 0 1rem">
             <FlexBetween>
                 {icon && icon}
                 <Box width="100%">
